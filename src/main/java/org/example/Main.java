@@ -21,18 +21,15 @@ public class Main {
         //WordCounter.calculatedWord();
     }
 
-    public static List<Employee> findDuplicates(List<Employee> notUnique){
-        List<Employee> Errors = new LinkedList<>();
-        for(int i=0;i<notUnique.size();i++){
-            for(int x=i+1;x<notUnique.size();x++){
-                if(notUnique.get(i).equals(notUnique.get(x))){
-                    Errors.add(notUnique.get(i));
-                }
+    public static List<Employee> findDuplicates(List<Employee> notUnique) {
+        Set<Employee> unique = new HashSet<>();
+        List<Employee> duplicates = new LinkedList<>();
+        for (Employee emp : notUnique) {
+            if (!unique.add(emp)) {
+                duplicates.add(emp);
             }
         }
-        //System.out.println(Errors.toString());
-        return Errors;
-
+        return duplicates;
     }
 
     public static Map<Integer,Employee> findUniques(List<Employee> Uniques){
@@ -52,7 +49,6 @@ public class Main {
         List<Employee> duplicates= new LinkedList<>(findDuplicates(employees));
         employees.removeAll(duplicates);
         employees.remove(null);
-        //System.out.println(employees.toString());
         return employees;
     }
 
